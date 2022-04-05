@@ -3,21 +3,33 @@
     <!-- CART BODY -->
       <tr>
       <th scope="row">1</th>
-      <td>Lorem ipsum.</td>
-      <td>12 USD</td>
-      <td><input name="cart-item-quantity-1" type="number" value="1" min="1"></td>
-      <td><strong>12 USD</strong></td>
+      <td>{{cart.name}}</td>
+      <td>{{cart.price}} USD</td>
+      <td><input name="cart-item-quantity-1" type="number" :value="cart.amount" min="1"></td>
+      <td><strong>{{cart.subTotal}} USD</strong></td>
       <td>
-        <a class="label label-info update-cart-item" href="#" data-product="">Update</a>
-        <a class="label label-danger delete-cart-item" href="#" data-product="">Delete</a>
+        <button class="btn label label-info update-cart-item" href="#" data-product="">Update</button>
+        <button class="btn label label-danger delete-cart-item" @click="deleteCart()">Delete</button>
       </td>
     </tr>
     </tbody>
 </template>
 
 <script>
+import {mapMutations} from "vuex";
 export default {
-  name: "CartItem"
+  name: "CartItem",
+  props:{
+    cart: Object
+  },
+  methods: {
+    ...mapMutations({
+      deleteCart: "moduleCart/deleteCart"
+    }),
+    deleteCart(){
+      this.deleteCart();
+    }
+  }
 }
 </script>
 

@@ -5,7 +5,7 @@
       <div class="panel panel-primary">
         <div class="panel-heading"><h1 class="panel-title">List Products</h1></div>
         <div class="panel-body" id="list-product">
-          <ProductItem></ProductItem>
+          <ProductItem v-for="(product, index) in products" :key="index" :product="product"></ProductItem>
         </div>
       </div>
     </div>
@@ -23,14 +23,15 @@ export default {
   computed: {
     ...mapState({
       isShowFormAddProduct: state => state.moduleProduct.isShowFormAddProduct,
+      products: state => state.moduleProduct.productList
     })
   },
   methods: {
     ...mapMutations({
-      showFormAddProduct2: 'moduleProduct/showFormAddProduct'
+      toggleFormAddProduct: 'moduleProduct/showFormAddProduct'
     }),
     showFormAddProduct(){
-      this.showFormAddProduct2();
+      this.toggleFormAddProduct();
     }
   }
 }
